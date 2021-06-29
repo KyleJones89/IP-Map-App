@@ -1,0 +1,2 @@
+10.101.101.101  mytestserver.mynetwork.mydomain
+20.101.101.101  mydnsserver.mynetwork.mydomain
