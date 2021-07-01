@@ -1,6 +1,5 @@
 from tkinter import *
-import tkinter
-
+from tksheet import *
 
 #[+] Definitions Pane[+]
 
