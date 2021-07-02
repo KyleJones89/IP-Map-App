@@ -1,56 +1,25 @@
 from tkinter import *
 from tksheet import *
+from tkinter import filedialog
+
 
 #[+] Definitions Pane[+]
 
 
 
+def UploadAction(event=None):
+    filename = filedialog.askopenfilename()
+    print('Selected:', filename)
 
-
-#######################################################################
-###########################BLANK FOR SPACING###########################
-#######################################################################
-
-
-
-#[+] Initialize Window[+]
-ip_tracker=Tk() 
-#######################################################################
-###########################BLANK FOR SPACING###########################
-#######################################################################
-
-#{+}Frame building and placement{+}
-topframe= Frame(ip_tracker,width=450,height=50,pady=3).grid(row=0,column=0,rowspan=4,columnspan=9)
-
-bottomFrame=Frame(ip_tracker,width=450,height=50,pady=3).grid(row=4, column= 0,rowspan=6,columnspan=9)
-
-#######################################################################
-###########################BLANK FOR SPACING###########################
-#######################################################################
-
-
-
-labelforEntry1 = Label(topframe,text="Enter IP Address: ")
-labelforEntry1.grid(row = 0,column = 0)
-
-entry1 = Entry(topframe, width = 50, borderwidth = 5)
-entry1.grid(row = 0, column = 1)
-
-
-
-labelforEntry2 = Label(topframe, text="Enter Name of System: ")
-labelforEntry2.grid(row = 0,column = 2)
-entry2 = Entry(topframe, width = 50, borderwidth = 5)
-entry2.grid(row = 0, column = 3)
-
+def ExportAction(event=None):
+    filename = filedialog.asksaveasfilename()
+    print('Selected for Import', filename)
 
 def checkifEntryEmpty(entry): #If entry is empty, return true
     if len(entry.get()) == 0:
         return True
     else:
         return False
-
-
 
 def crossReferenceTwoBoxesEmpty(boolvalue1, boolvalue2):
 
@@ -68,26 +37,89 @@ def displayEntryBoxData(varentry1,varentry2):
         return "This is a bad input"
 
 
-def myclick():
-    
-    mylabel = Label(topframe, text=displayEntryBoxData(entry2,entry1))
-    
-    mylabel.grid(row=2,column=2)
-    
+#def myclick():
+    #
+    #mylabel = Label(topframe, text=displayEntryBoxData(ipEntry,nameSpaceEntry))
+    #
+    #mylabel.grid(row=2,column=2)
 
-    
 
-buttonTest = Button(topframe,height=1,width=9,text="push to test",command=myclick)
-buttonTest.grid(row=1,column=2)
-
+#######################################################################
+###########################BLANK FOR SPACING###########################
+#######################################################################
 
 
 
+#[+] Initialize Window[+]
+ip_tracker=Tk() 
+#######################################################################
+###########################BLANK FOR SPACING###########################
+#######################################################################
+
+#{+}Frame building and placement{+}
+topframe= Frame(ip_tracker,width=450,height=50,pady=3).grid(row=0,column=0,rowspan=4,columnspan=9)
+
+bottomFrame=Frame(ip_tracker,width=600,height=50,pady=3).grid(row=4, column= 0,rowspan=6,columnspan=9)
+
+#######################################################################
+###########################BLANK FOR SPACING###########################
+#######################################################################
+
+
+
+#[+] Initialize Widgets[+]
+uploadButton =  Button(topframe,text= "Import Data", command=UploadAction)
+
+exportButton =  Button(topframe,text= "Export Data",command=ExportAction)
+
+ipLabel = Label(topframe,text="Enter IP Address: ")
+
+ipEntry = Entry(topframe, width = 50, borderwidth = 5)
+
+nameSpaceLabel = Label(topframe, text="Enter Name of System: ")
+
+nameSpaceEntry = Entry(topframe, width = 50, borderwidth = 5)
+
+buttonTest = Button(topframe,height=1,width=9,text="push to test")#,command=myclick)
 
 mainInterfaceLabel = Label(ip_tracker, text="IP Tracker")
 
+dataSheet = Sheet(bottomFrame)
+
+dataSheet.set_sheet_data([[f"{ri+cj}" for cj in range(4)] for ri in range(1)])
+
+dataSheet.enable_bindings(("single_select", "row_select","column_width_resize","arrowkeys","right_click_popup_menu",
+"rc_select","rc_insert_row","rc_delete_row", "copy","cut","paste","delete","undo","edit_cell"))
+
+#######################################################################
+###########################BLANK FOR SPACING###########################
+#######################################################################
+
+
+#{+}Place Widgets{+}
+uploadButton.grid(row=0, column=0)
+exportButton.grid(row=0,column=1)
+ipLabel.grid(row = 0,column = 5)
+ipEntry.grid(row = 0, column = 6)
+nameSpaceLabel.grid(row = 0,column = 7)
+nameSpaceEntry.grid(row = 0, column = 8)
+buttonTest.grid(row=1,column=7)
+dataSheet.grid(row=4,column=0,columnspan=9,sticky='ew')
 
 
 
+
+
+
+#######################################################################
+###########################BLANK FOR SPACING###########################
+#######################################################################
+
+
+
+#{+}END OF PROGRAM. INITIATE LOOP{+}
 ip_tracker.mainloop()
+#######################################################################
+###########################BLANK FOR SPACING###########################
+#######################################################################
  
