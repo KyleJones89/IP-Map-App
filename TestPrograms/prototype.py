@@ -39,7 +39,7 @@ def displayEntryBoxData(varentry1,varentry2):
 
 #def myclick():
     #
-    #mylabel = Label(topframe, text=displayEntryBoxData(ipEntry,nameSpaceEntry))
+    #mylabel = Label(topframe, text=displayEntryBoxData(ipEntry,nameSpaceEn))
     #
     #mylabel.grid(row=2,column=2)
 
@@ -51,10 +51,12 @@ def displayEntryBoxData(varentry1,varentry2):
 
 
 #[+] Initialize Window[+]
-ip_tracker=Tk() 
+ip_tracker=Tk()
+
 #######################################################################
 ###########################BLANK FOR SPACING###########################
 #######################################################################
+
 
 #{+}Frame building and placement{+}
 topframe= Frame(ip_tracker,width=450,height=50,pady=3).grid(row=0,column=0,rowspan=4,columnspan=9)
@@ -78,15 +80,15 @@ ipEntry = Entry(topframe, width = 50, borderwidth = 5)
 
 nameSpaceLabel = Label(topframe, text="Enter Name of System: ")
 
-nameSpaceEntry = Entry(topframe, width = 50, borderwidth = 5)
+nameSpaceEn = Entry(topframe, width = 50, borderwidth = 5)
 
 buttonTest = Button(topframe,height=1,width=9,text="push to test")#,command=myclick)
 
 mainInterfaceLabel = Label(ip_tracker, text="IP Tracker")
 
-dataSheet = Sheet(bottomFrame)
+dataSheet = Sheet(bottomFrame,total_columns=4,total_rows=16)
 
-dataSheet.set_sheet_data([[f"{ri+cj}" for cj in range(4)] for ri in range(1)])
+dataSheet.set_sheet_data()
 
 dataSheet.enable_bindings(("single_select", "row_select","column_width_resize","arrowkeys","right_click_popup_menu",
 "rc_select","rc_insert_row","rc_delete_row", "copy","cut","paste","delete","undo","edit_cell"))
@@ -102,7 +104,7 @@ exportButton.grid(row=0,column=1)
 ipLabel.grid(row = 0,column = 5)
 ipEntry.grid(row = 0, column = 6)
 nameSpaceLabel.grid(row = 0,column = 7)
-nameSpaceEntry.grid(row = 0, column = 8)
+nameSpaceEn.grid(row = 0, column = 8)
 buttonTest.grid(row=1,column=7)
 dataSheet.grid(row=4,column=0,columnspan=9,sticky='ew')
 
